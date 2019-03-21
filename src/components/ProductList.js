@@ -5,7 +5,7 @@ import { ProductConsumer } from '../context';
 
 class ProductList extends Component {
 
-// state coming from context.js ProductConsumer
+// state coming from context.js ProductConsumer and passing data from data.js
 
   render() {
   
@@ -17,7 +17,7 @@ class ProductList extends Component {
                 <div className="row">
                   <ProductConsumer>
                     {value => {
-                      console.log(value.products); 
+                      console.log("products being pass to Product: ", value.products); 
                       return value.products.map( product =>{
                         return <Product key={product.id} product={product} />
                       })
