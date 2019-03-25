@@ -35,7 +35,7 @@ class Details extends Component {
                         </ButtonContainer>
                       </Link>
 
-                      <ButtonContainer disabled={inCart ? true : false } 
+                      <ButtonContainer cart disabled={inCart ? true : false } 
                                        onClick={() => {
                                           value.addToCart(id)
                       }}>
