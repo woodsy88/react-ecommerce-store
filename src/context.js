@@ -7,66 +7,51 @@ const ProductContext = React.createContext();
 
 class ProductProvider extends Component {
 
-  state = {
-    products: [],
-    detailProduct: detailProduct
-  };
+    state = {
+      products: [],
+      detailProduct: detailProduct
+    };
 
-  componentDidMount(){
-    this.setProducts();
-  }
+    componentDidMount(){
+      this.setProducts();
+    }
 
-  setProducts = () => {
+    setProducts = () => {
 
-    let tempProducts = [];
-    storeProducts.forEach(item => {
-      const singleItem = {...item};
-      tempProducts = [...tempProducts, singleItem];  
-    })
+      let tempProducts = [];
+      
+      storeProducts.forEach(item => {
+        const singleItem = {...item};
+        tempProducts = [...tempProducts, singleItem];  
+      })
 
-    this.setState(() => {
-      return {products: tempProducts}
-    })
-  }
+      this.setState(() => {
+        return {products: tempProducts}
+      })
+    }
 
-  handleDetail = () => {
-    console.log("hello from detail");  
-  };
+    handleDetail = () => {
+      console.log("hello from detail");  
+    };
 
-  addToCart = (id) => {
-    console.log(`# ${id} product being added to card `);  
-  };
+    addToCart = (id) => {
+      console.log(`# ${id} product being added to card `);  
+    };
 
-  // tester = () => {
-  //   console.log('State products :', this.state.products[0].inCart);
-  //   console.log('Data products :', storeProducts[0].inCart);
+    render() {
+      console.log('trying to check state:', this.state.products);
+      return (
+        <ProductContext.Provider value={{
+          ...this.state,
+          handleDetail: this.handleDetail,
+          addToCart: this.addToCart
+        }}>
+        {/* <button onClick={this.tester}>test me</button> */}
 
-  //   const tempProducts = [...this.state.products];
-
-  //   tempProducts[0].inCart = true;
-
-  //   this.setState(()=>{
-  //     return {products:tempProducts}
-  //   },()=>{
-  //     console.log('Callback: State products :', this.state.products[0].inCart);
-  //     console.log('Callback: Data products :', storeProducts[0].inCart);
-  //   })
-  // }
-
-  render() {
-    console.log('trying to check state:', this.state.products);
-    return (
-      <ProductContext.Provider value={{
-        ...this.state,
-        handleDetail: this.handleDetail,
-        addToCart: this.addToCart
-      }}>
-      {/* <button onClick={this.tester}>test me</button> */}
-
-        {this.props.children}
-      </ProductContext.Provider>
-    );
-  }
+          {this.props.children}
+        </ProductContext.Provider>
+      );
+    }
 }
 
 const ProductConsumer = ProductContext.Consumer;
