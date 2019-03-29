@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
 import { storeProducts, detailProduct } from './data';
+import React, { Component } from 'react';
 
 const ProductContext = React.createContext();
 // Provider
@@ -9,7 +9,8 @@ class ProductProvider extends Component {
 
     state = {
       products: [],
-      detailProduct: detailProduct
+      detailProduct: detailProduct,
+      cart: []
     };
 
     componentDidMount(){
@@ -19,7 +20,7 @@ class ProductProvider extends Component {
     setProducts = () => {
 
       let tempProducts = [];
-      
+
       storeProducts.forEach(item => {
         const singleItem = {...item};
         tempProducts = [...tempProducts, singleItem];  
@@ -30,12 +31,43 @@ class ProductProvider extends Component {
       })
     }
 
-    handleDetail = () => {
-      console.log("hello from detail");  
+    getItem = (id) => {
+      const product = this.state.products.find(item => item.id === id );
+      console.log('getItem product: ', product);
+      return product;
+    }
+
+    handleDetail = (id) => {
+      console.log("handleDetail ran");  
+      const product = this.getItem(id);
+      this.setState(() => {
+        return {
+          // set individual product to detailProduct in state
+          detailProduct: product
+        }
+      })
     };
 
     addToCart = (id) => {
-      console.log(`# ${id} product being added to card `);  
+
+      let tempProducts = [...this.state.products];
+      const index= tempProducts.indexOf(this.getItem(id));
+      console.log(index);
+      const product = tempProducts[index];
+      product.inCart = true;
+      product.count = 1;
+      const price = product.price;
+      product.total = price;
+
+      this.setState(() => {
+        return {
+            products: tempProducts,
+            cart: [...this.state.cart, product]
+          }
+      },
+      () => {console.log('cart: ', this.state);
+      }
+      );
     };
 
     render() {
