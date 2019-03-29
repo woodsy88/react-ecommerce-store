@@ -9,7 +9,7 @@ class Details extends Component {
       <ProductConsumer>
         {(value) => {
 
-          console.log("product detail value: ", value.detailProduct);
+          // console.log("product detail value: ", value.detailProduct);
           const { id, title, img, price, company, info, inCart} = value.detailProduct;
 
           return (
@@ -37,7 +37,8 @@ class Details extends Component {
 
                       <ButtonContainer cart disabled={inCart ? true : false } 
                                        onClick={() => {
-                                          value.addToCart(id)
+                                          value.addToCart(id);
+                                          value.openModal(id);
                       }}>
                         
                         {inCart ? 'in Cart' : 'Add to cart'}

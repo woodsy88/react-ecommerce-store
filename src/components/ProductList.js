@@ -17,7 +17,7 @@ class ProductList extends Component {
                 <div className="row">
                   <ProductConsumer>
                     {value => {
-                      console.log("products being pass to Product: ", value.products); 
+                      // console.log("products being pass to Product: ", value.products); 
                       return value.products.map( product =>{
                         return <Product key={product.id} product={product} />
                       })

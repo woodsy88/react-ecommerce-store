@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+// can pass the prop cart when rendering component and button will be yellow
+
 export const ButtonContainer = styled.button`
   text-transform: uppercase;
   font-size: 1.4rem;

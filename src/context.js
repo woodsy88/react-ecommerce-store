@@ -10,7 +10,9 @@ class ProductProvider extends Component {
     state = {
       products: [],
       detailProduct: detailProduct,
-      cart: []
+      cart: [],
+      modalOpen: false,
+      modalProduct: detailProduct
     };
 
     componentDidMount(){
@@ -31,6 +33,7 @@ class ProductProvider extends Component {
       })
     }
 
+    // Utility method - a method that is used in almost all other methods to get a specific product
     getItem = (id) => {
       const product = this.state.products.find(item => item.id === id );
       console.log('getItem product: ', product);
@@ -70,13 +73,36 @@ class ProductProvider extends Component {
       );
     };
 
+    openModal = id => {
+      const product = this.getItem(id);
+      this.setState(()=> {
+        return {
+          modalProduct: product,
+          modalOpen: true
+        }
+      },
+      () => {console.log('open modal ran');
+      }
+      )
+    }
+
+    closeModal = () => {
+      this.setState(() => {
+        return {
+          modalOpen: false
+        }
+      })
+    }
+
     render() {
       console.log('trying to check state:', this.state.products);
       return (
         <ProductContext.Provider value={{
           ...this.state,
           handleDetail: this.handleDetail,
-          addToCart: this.addToCart
+          addToCart: this.addToCart,
+          openModal: this.openModal,
+          closeModal: this.closeModal
         }}>
         {/* <button onClick={this.tester}>test me</button> */}
 
