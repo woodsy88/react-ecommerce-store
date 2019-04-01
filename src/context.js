@@ -12,7 +12,10 @@ class ProductProvider extends Component {
       detailProduct: detailProduct,
       cart: [],
       modalOpen: false,
-      modalProduct: detailProduct
+      modalProduct: detailProduct,
+      cartSubtotal: 0,
+      cartTax: 0,
+      cartTotal: 0,
     };
 
     componentDidMount(){
@@ -39,7 +42,7 @@ class ProductProvider extends Component {
       console.log('getItem product: ', product);
       return product;
     }
-
+    // USING THIS STYLE OF ARROW FUNCTION NEGATES THE NEED TO BIND OUR FUNCTIONS IN A CONTRUCTOR
     handleDetail = (id) => {
       console.log("handleDetail ran");  
       const product = this.getItem(id);
@@ -94,6 +97,22 @@ class ProductProvider extends Component {
       })
     }
 
+    increment = (id) => {
+      console.log('this is increment method');
+    }
+
+    decrement = (id) => {
+      console.log('this is decrement method');
+    }
+
+    removeItem = (id) => {
+        console.log('item removed');      
+    }
+
+    clearCart = (id) => {
+      console.log('items cleared from cart');
+    }
+
     render() {
       console.log('trying to check state:', this.state.products);
       return (
@@ -102,7 +121,11 @@ class ProductProvider extends Component {
           handleDetail: this.handleDetail,
           addToCart: this.addToCart,
           openModal: this.openModal,
-          closeModal: this.closeModal
+          closeModal: this.closeModal,
+          increment: this.increment,
+          decrement: this.decrement,
+          removeItem: this.removeItem,
+          clearCart: this.clearCart,
         }}>
         {/* <button onClick={this.tester}>test me</button> */}
 

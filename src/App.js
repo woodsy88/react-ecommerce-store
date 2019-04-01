@@ -10,6 +10,7 @@ import Default from './components/Default';
 import Details from './components/Details';
 import Modal from './components/Modal';
 
+
 class App extends Component {
   render() {
     return (
