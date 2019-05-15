@@ -21,7 +21,7 @@ class Cart extends Component {
                 <CartColumns/>
                 {/* pass the value from the ProductConsumer - context.js - down to CartList */}
                 <CartList value={value} />
-                <CartTotals value={value} />
+                <CartTotals value={value} history={this.props.history} />
               </React.Fragment> )
             } else {
               return (
